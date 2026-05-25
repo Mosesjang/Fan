@@ -1,0 +1,5 @@
+../Src/uart.c:23:10:uartInit	1
+../Src/uart.c:41:6:uartSendChar	2
+../Src/uart.c:50:6:sendUartString	2
+../Src/uart.c:57:6:hexDigitToChar	2
+../Src/uart.c:68:6:extractHex	4

@@ -1,0 +1,2 @@
+../Src/motor.c:18:6:pwmInit	1
+../Src/motor.c:43:6:setFanState	5
