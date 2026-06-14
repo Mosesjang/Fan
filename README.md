@@ -1,5 +1,5 @@
-<img width="1366" height="1024" alt="KakaoTalk_20260614_161949553" src="https://github.com/user-attachments/assets/842fd672-a7ca-46aa-992e-a1249894b0b7" />
-<img width="1366" height="1024" alt="KakaoTalk_20260614_161949553" src="https://github.com/user-attachments/assets/72398ee0-10ed-4294-80f9-91bd99d7ffe8" />
+
+
 # Fan
 This is my first bare-metal project.
   It's just a basic fan that turns on a pc fan and a led and changes the motor speed  when I push a button.
@@ -43,7 +43,7 @@ RGB LED indicators and PWM motor control.
 | Flyback Diode | 1N5819 |
 
 ## Wiring
-[schematic photo here]
+<img width="1366" height="1024" alt="KakaoTalk_20260614_161949553" src="https://github.com/user-attachments/assets/842fd672-a7ca-46aa-992e-a1249894b0b7" />
 
 ## Problems & Solutions
 ### Problem 1: MOSFET not switching at 3.3V
