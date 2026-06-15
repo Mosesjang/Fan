@@ -1,0 +1,2 @@
+../Src/motor.c:20:6:pwmInit	1
+../Src/motor.c:41:6:stateMachine	5

@@ -1,0 +1,2 @@
+../Src/interrupt.c:20:6:interruptInit	4	static
+../Src/interrupt.c:36:6:EXTI3_IRQHandler	8	static

@@ -1,0 +1,77 @@
+Git & GitHub Complete Guide
+The 3 Commands You Must Memorize
+git add .                    → select all changed files
+git commit -m "description"  → save a snapshot
+git push origin main         → upload to GitHub
+Use these every time you make significant changes!
+
+One Time Setup (per computer)
+Install Git
+Download from: git-scm.com
+Verify: git --version
+Configure Identity
+git config --global user.name "YourName"
+git config --global user.email "your@email.com"
+
+Starting a New Project from Scratch
+Step 1: Create repo on GitHub
+1. Go to github.com
+2. Click "+" → "New repository"
+3. Name your project
+4. Add README
+5. Click "Create repository"
+6. Copy the repo URL!
+Step 2: Connect local code to GitHub
+Open Git Bash in your project folder:
+
+git init                           → initialize git in folder
+git add .                          → select all files
+git commit -m "Initial commit"     → save first snapshot
+git branch -M main                 → name branch "main"
+git remote add origin <URL>        → connect to GitHub
+git pull origin main --allow-unrelated-histories  → sync README
+git push -u origin main            → upload to GitHub!
+
+Daily Workflow
+Make changes to code
+      ↓
+git add .
+      ↓
+git commit -m "what you changed"
+      ↓
+git push origin main
+
+How Git Works
+NOT replacing files → ADDING snapshots!
+
+Timeline:
+Commit 1 → Commit 2 → Commit 3 → Commit 4
+"Initial"   "PWM"     "Buttons"   "IR sensor"
+
+Each commit = save point you can return to!
+
+Useful Commands
+git status          → see what changed
+git log             → see all commits
+git remote -v       → see connected GitHub URL
+git pull            → download latest from GitHub
+git checkout <hash> → jump to any commit!
+
+Why GitHub?
+✅ Backup your code online
+✅ Show your work to employers
+✅ Collaborate with others
+✅ Track your progress over time
+✅ Never lose code again!
+
+Common Problems & Fixes
+Push rejected:
+→ git pull origin main --allow-unrelated-histories
+→ git push origin main
+
+Wrong remote URL:
+→ git remote remove origin
+→ git remote add origin <correct URL>
+
+Nothing to commit:
+→ your files are already saved! just push!

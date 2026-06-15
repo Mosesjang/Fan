@@ -1,0 +1,3 @@
+../Src/uart.c:16:6:uartInit	1
+../Src/uart.c:31:6:printData	2
+../Src/uart.c:36:6:printString	2

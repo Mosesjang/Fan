@@ -1,5 +1,0 @@
-../Src/button.c:12:6:button_Init	4	static
-../Src/button.c:25:5:readButton1	16	static
-../Src/button.c:37:5:readButton2	16	static
-../Src/button.c:49:5:readButton3	16	static
-../Src/button.c:61:10:checkButton	24	static

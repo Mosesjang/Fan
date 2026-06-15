@@ -1,0 +1,99 @@
+UART on STM32 — Complete Guide
+
+What is UART?
+Universal Asynchronous Receiver Transmitter
+→ Sends/receives data between STM32 and computer
+→ No shared clock — both sides agree on speed (baud rate)
+→ 2 wires: TX (send) and RX (receive)
+→ Like printf() for embedded systems!
+
+--------------------------------------------------------------------------
+
+The Setup Steps
+Step 1: Enable Clocks
+cAPB1_RCC |= (1 << 17);  // USART2 is on APB1 bus
+AHB1_RCC |= (1 << 0);   // GPIOA is on AHB1 bus
+
+Without clock → peripheral is completely dead!
+
+Step 2: Set GPIO to Alternate Function
+cMODER &= ~(3 << 4);  // clear PA2 bits (pin 2 × 2 = bit 4)
+MODER |=  (2 << 4);  // set 10 = AF mode
+
+Tells PA2 "connect to a peripheral, not regular GPIO"
+
+Step 3: Select USART2 (AF7) for PA2
+AFRL &= ~(0xF << 8);  // clear 4 bits for PA2 (pin 2 × 4 = bit 8)
+AFRL |=  (7 << 8);    // AF7 = USART2
+
+Without this PA2 is in AF mode but doesn't know WHICH peripheral!
+
+Step 4: Set Baud Rate
+USART_BRR = 1667;  // 16,000,000 ÷ 9600 = 1667
+
+Both STM32 and computer must agree on same speed!
+9600 baud = 9600 bits per second
+
+Step 5: Enable UART
+cUSART_CR1 |= (1 << 3);   // TE = Transmitter Enable
+USART_CR1 |= (1 << 13);  // UE = UART Enable (master switch!)
+
+Clock = power to the block
+UE = master switch inside the block!
+
+
+Sending Data
+void uartSendChar(char c){
+    while(!(USART_SR & (1 << 7)));  // wait until DR empty (TXE=1)
+    USART_DR = c;                    // put character in DR → UART sends!
+}
+What each register does:
+SR  → Status Register: dashboard showing what UART is doing
+      Bit 7 (TXE) = 1 means DR is empty and ready!
+
+DR  → Data Register: put byte here → UART transmits it automatically!
+
+Register Map
+USART2 base: 0x40004400
+
+SR   → base + 0x00 = 0x40004400  (status)
+DR   → base + 0x04 = 0x40004404  (data)
+BRR  → base + 0x08 = 0x40004408  (baud rate)
+CR1  → base + 0x0C = 0x4000440C  (control)
+-----------------------------------------------------------------------------
+
+Complete Code Template
+c// Addresses
+#define APB1_RCC  (*(volatile uint32_t*)0x40023840)
+#define AHB1_RCC  (*(volatile uint32_t*)0x40023830)
+#define MODER     (*(volatile uint32_t*)0x40020000)
+#define AFRL      (*(volatile uint32_t*)0x40020020)
+#define USART_SR  (*(volatile uint32_t*)0x40004400)
+#define USART_DR  (*(volatile uint32_t*)0x40004404)
+#define USART_BRR (*(volatile uint32_t*)0x40004408)
+#define USART_CR1 (*(volatile uint32_t*)0x4000440C)
+
+void uartInit(){
+    APB1_RCC |= (1 << 17);  // USART2 clock
+    AHB1_RCC |= (1 << 0);   // GPIOA clock
+    MODER &= ~(3 << 4);     // clear PA2
+    MODER |=  (2 << 4);     // AF mode
+    AFRL  &= ~(0xF << 8);   // clear AF bits
+    AFRL  |=  (7 << 8);     // AF7 = USART2
+    USART_BRR = 1667;        // 9600 baud
+    USART_CR1 |= (1 << 3);  // TX enable
+    USART_CR1 |= (1 << 13); // UART enable
+}
+
+void uartSendChar(char c){
+    while(!(USART_SR & (1 << 7)));
+    USART_DR = c;
+}
+
+How to find UART registers yourself
+1. Open reference manual
+2. Find USART section
+3. Base address + offset = register address
+4. Read bit descriptions in CR1, SR, BRR
+
+Save this and delete it later to recreate from scratch! 💪

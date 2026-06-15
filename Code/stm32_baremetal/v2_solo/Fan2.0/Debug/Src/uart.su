@@ -1,0 +1,3 @@
+../Src/uart.c:16:6:uartInit	4	static
+../Src/uart.c:31:6:printData	16	static
+../Src/uart.c:36:6:printString	16	static

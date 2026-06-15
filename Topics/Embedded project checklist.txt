@@ -1,0 +1,43 @@
+Embedded project checklist:
+
+1. Write down Project goal: what purpose you want to accomplish with this device.
+2. Write down product requirements and functions: the thing the devices need to do to accomplish it purpose or goal.
+3. Write down the: computer(brain), Input(sensors) and output(output devices) and Power(battery/plug) required.
+4. Dive deep into your peripherial component to find the best fit for your project.
+5. When you have to similar choices: compare 1.effeciency 2. Noise 3. durability 4. price 5. control.
+6.Choosing a microcontroller: 1. write down the input and output devices 2. write down the interface needed to communicate with these devices 3. then you consider the specs a microcontroller has to have to work
+7.some other factors to consider when choosing a MUC: 1.speed 2. code size 3. power 4. price in stock 5. tools, docs, forum
+8.make your pcb/bread board prototype and write code to test if anything works
+
+
+Goal:
+
+What problem it solves
+
+Requirements:
+
+Must do / nice to have
+
+Constraints:
+
+Money / time / size
+
+Hardware:
+
+MCU, sensors, outputs, power, driver
+
+Firmware:
+
+Modules + states
+
+Risks:
+
+Noise? Overcurrent? Delay bugs?
+
+Test Plan:
+
+How you know it works
+
+Future Improvements:
+
+V2 ideas

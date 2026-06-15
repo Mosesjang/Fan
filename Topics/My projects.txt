@@ -1,0 +1,28 @@
+My projects:
+
+Complete 2025-2026 Roadmap
+Project 1: Foldable Fan ← current!
+Topics: GPIO, PWM, Timers, State machines
+        UART, Interrupts, IR remote
+Project 2: Digital Alarm Clock
+Topics: I2C, SPI, Interrupts
++ NEW: Version Control (Git) ← start here!
+Project 3: Soil Moisture Monitor
+Topics: ADC, Low power, Bluetooth
++ NEW: Watchdog Timer ← add robustness!
+Project 4: Wireless Continuity Tester
+Topics: ADC advanced, Wireless
++ NEW: Flash/EEPROM ← save calibration data!
++ NEW: Bootloader basics ← firmware updates!
+Project 5: E-ink Picture Frame
+Topics: SPI advanced, WiFi
++ NEW: PCB Design ← design your own board!
+Project 6: GPS Tracker
+Topics: GPS, GSM, Ultra low power
++ NEW: PCB Design advanced ← full custom hardware!
+
+Year 2 (2027)
+⬜ FreeRTOS
+⬜ DMA
+⬜ Advanced PCB
+⬜ Get a job! 💪

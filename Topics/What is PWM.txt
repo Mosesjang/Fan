@@ -1,0 +1,109 @@
+The Golden Rule
+
+"PWM works by rapidly switching a pin HIGH and LOW. Three things define it — the timer clock, the ARR which sets the period, and the CCR which sets the duty cycle. The hardware does all the switching automatically, freeing the CPU. Before any of this works, you need to enable the peripheral clocks, set the GPIO to alternate function mode, and configure the timer in PWM mode so it continuously compares the count against CCR."
+
+Before using ANY peripheral, always enable its clock first!
+
+
+Step 1: Find the right clock bus
+Open the datasheet block diagram:
+AHB1 bus → GPIO, DMA, Flash
+APB1 bus → TIM2, TIM3, TIM4, UART, SPI
+APB2 bus → TIM1, ADC, SPI1
+Enable the correct RCC register:
+cRCC_AHB1ENR |= (1 << x);  // GPIO
+RCC_APB1ENR |= (1 << x);  // TIM2
+
+Step 2: Configure GPIO pin for Alternate Function
+c// MODER: set pin to AF mode (10)
+GPIOA_MODER &= ~(3 << pin*2);  // clear
+GPIOA_MODER |=  (2 << pin*2);  // set 10
+
+Step 3: Select the correct AF number
+1. Find pin in datasheet pin definitions table
+2. Find your peripheral (e.g. TIM2_CH1)
+3. Find AF number from AF mapping table:
+   AF0 = system
+   AF1 = TIM1, TIM2
+   AF2 = TIM3, TIM4, TIM5
+   AF3 = TIM9, TIM10, TIM11
+4. Write AF number to AFRL or AFRH
+AFRL vs AFRH rule:
+Pin 0-7  → AFRL (offset 0x20), bit = pin × 4
+Pin 8-15 → AFRH (offset 0x24), bit = (pin-8) × 4
+cAFRH &= ~(0xF << (pin-8)*4);   // clear 4 bits
+AFRH |=  (0x1 << (pin-8)*4);   // write AF1
+
+Step 4: Configure TIM2 registers
+TIM2 base address: 0x40000000
+RegisterOffsetPurposeCR10x00Start/stop timerCCMR10x18PWM mode for CH1/CH2CCER0x20Enable pin outputPSC0x28Clock dividerARR0x2CPeriod/frequencyCCR10x34Duty cycle CH1
+What each register does:
+PSC   → slows clock: speed = 16MHz ÷ (PSC+1)
+        PSC=15 → 1,000,000 ticks/sec
+
+ARR   → sets cycle length (frequency)
+        frequency = timer speed ÷ (ARR+1)
+        ARR=999 → 1kHz PWM
+
+CCR1  → sets duty cycle
+        duty% = CCR1 ÷ (ARR+1)
+        CCR1=750 → 75%
+
+CCMR1 → sets PWM rule:
+        "stay HIGH while counter < CCR1
+         go LOW when counter > CCR1"
+        PWM mode 1 = 0x68
+More precisely, PWM mode tells the timer:
+
+While count < CCR1 → keep pin HIGH
+While count ≥ CCR1 → keep pin LOW
+When count hits ARR → reset back to 0 and repeat
+
+CCER  → connects PWM signal to physical pin
+        bit 0 = channel 1 enable
+
+CR1   → starts the counter
+        bit 0 = CEN (counter enable)
+        bit 7 = ARPE (auto reload preload)
+
+Step 5: Complete code template
+cvoid pwmInit(void){
+    // 1. Enable clocks
+    RCC_APB1ENR |= (1 << 0);   // TIM2
+    RCC_AHB1ENR |= (1 << 0);   // GPIOA
+
+    // 2. Set pin to AF mode
+    GPIOA_MODER &= ~(3 << 30); // clear PA15
+    GPIOA_MODER |=  (2 << 30); // AF mode
+
+    // 3. Select TIM2 (AF1) for PA15
+    AFRH &= ~(0xF << 28);
+    AFRH |=  (0x1 << 28);
+
+    // 4. Configure timer
+    TIM2_PSC  = 15;    // 1MHz
+    TIM2_ARR  = 999;   // 1kHz
+    TIM2_CCR1 = 750;   // 75% duty
+
+    // 5. PWM mode 1 + preload
+    TIM2_CCMR1 &= ~(0xFF << 0);
+    TIM2_CCMR1 |=  (0x68 << 0);
+
+    // 6. Enable output
+    TIM2_CCER |= (1 << 0);
+
+    // 7. Start timer
+    TIM2_CR1 |= (1 << 7);  // ARPE
+    TIM2_CR1 |= (1 << 0);  // CEN
+}
+
+Fan speed values (PSC=15, ARR=999, 1kHz)
+Speed 1 (30%): CCR1 = 300
+Speed 2 (55%): CCR1 = 550
+Speed 3 (75%): CCR1 = 750
+
+How to find ANY register
+1. Open reference manual
+2. Find peripheral section
+3. Base address + offset = register address
+4. Read bit descriptions carefully

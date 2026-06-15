@@ -1,0 +1,22 @@
+How to learn to write better code:
+
+1. CODE REVIEW
+   → Have someone review your code
+   → GitHub is perfect for this!
+
+2. READ OTHER PEOPLE'S CODE
+   → Look at open source embedded projects
+   → See how professionals structure code
+
+3. LEARN THE THEORY
+   → Data structures
+   → Basic algorithms
+   → Computer architecture
+
+4. DOCUMENT EVERYTHING
+   → Writing forces clear thinking
+   → Your Instagram/LinkedIn plan is perfect!
+
+5. STRUGGLE DELIBERATELY
+   → Don't look up answers too fast
+   → You already do this well! 💪

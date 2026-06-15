@@ -1,2 +1,0 @@
-../Src/IrSensor.c:31:6:irInit	4	static
-../Src/IrSensor.c:48:6:EXTI3_IRQHandler	8	static

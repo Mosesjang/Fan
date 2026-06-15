@@ -1,0 +1,70 @@
+Full Names of All Abbreviations
+Buses
+AHB1  = Advanced High-performance Bus 1
+APB1  = Advanced Peripheral Bus 1
+APB2  = Advanced Peripheral Bus 2
+RCC
+RCC      = Reset and Clock Control
+AHB1ENR  = AHB1 Enable Register
+APB1ENR  = APB1 Enable Register
+APB2ENR  = APB2 Enable Register
+GPIO
+GPIO   = General Purpose Input Output
+MODER  = Mode Register
+PUPDR  = Pull-Up Pull-Down Register
+IDR    = Input Data Register
+ODR    = Output Data Register
+AFRL   = Alternate Function Register Low (pins 0-7)
+AFRH   = Alternate Function Register High (pins 8-15)
+AF     = Alternate Function
+PWM/Timer
+TIM    = Timer
+PSC    = Prescaler
+ARR    = Auto Reload Register
+CCR    = Capture Compare Register
+CCMR   = Capture Compare Mode Register
+CCER   = Capture Compare Enable Register
+CR1    = Control Register 1
+CNT    = Counter
+PWM    = Pulse Width Modulation
+UART
+UART   = Universal Asynchronous Receiver Transmitter
+USART  = Universal Synchronous Asynchronous Receiver Transmitter
+BRR    = Baud Rate Register
+CR1    = Control Register 1
+SR     = Status Register
+DR     = Data Register
+TXE    = Transmit data register Empty
+TE     = Transmitter Enable
+UE     = USART Enable
+TX     = Transmit
+RX     = Receive
+Interrupts
+EXTI      = External Interrupt
+SYSCFG    = System Configuration Controller
+EXTICR1   = External Interrupt Configuration Register 1
+IMR       = Interrupt Mask Register
+RTSR      = Rising Trigger Selection Register
+FTSR      = Falling Trigger Selection Register
+PR        = Pending Register
+NVIC      = Nested Vector Interrupt Controller
+ISER      = Interrupt Set Enable Register
+ISR       = Interrupt Service Routine
+IRQ       = Interrupt Request
+IRQHandler = Interrupt Request Handler
+General
+MCU    = Microcontroller Unit
+CPU    = Central Processing Unit
+GPIO   = General Purpose Input Output
+HAL    = Hardware Abstraction Layer
+RTOS   = Real Time Operating System
+DMA    = Direct Memory Access
+ADC    = Analog to Digital Converter
+SPI    = Serial Peripheral Interface
+I2C    = Inter-Integrated Circuit
+PCB    = Printed Circuit Board
+MOSFET = Metal Oxide Semiconductor Field Effect Transistor
+PWM    = Pulse Width Modulation
+NEC    = Nippon Electric Company (IR protocol)
+JTAG   = Joint Test Action Group
+SWD    = Serial Wire Debug

@@ -1,0 +1,168 @@
+How to turn on an led:
+
+Embedded Driver Workflow (Follow This Exactly)
+
+1. Define the Hardware (before coding)
+
+Write this down:
+
+Peripheral: GPIO
+Port: GPIOC
+Pin: 10
+Function: Output (LED)
+
+If you skip this → you guess → you make mistakes.
+
+2. Read the Datasheet (only what you need)
+
+Find:
+
+clock register → RCC_AHB1ENR
+mode register → GPIOx_MODER
+output register → GPIOx_ODR or BSRR
+
+Don’t read everything—just what controls your pin.
+
+3. Create Module Files
+led.h  → interface
+led.c  → implementation
+main.c → usage
+
+4. Design the Interface (.h)
+
+Ask:
+
+“What functions do I need?”
+
+For LED:
+
+Init
+On
+Off
+
+So:
+
+void LED_Init(void);
+void LED_On(void);
+void LED_Off(void);
+
+No hardware details here.
+
+5. Map Hardware in .c
+
+Define:
+
+base address
+register addresses
+pin number
+
+Example thinking:
+
+RCC_AHB1ENR → enable clock
+GPIOC_MODER → configure mode
+GPIOC_ODR   → control output
+
+Keep this only in .c
+
+6. Initialize Peripheral (Init function)
+
+Always follow this order:
+
+Step 1 — Enable clock
+set correct bit in RCC
+Step 2 — Configure mode
+clear 2 bits
+set correct mode (01 for output)
+
+Rule:
+
+position = pin * 2
+7. Control the Hardware
+Turn ON
+set bit in ODR
+Turn OFF
+clear bit in ODR
+8. Use It in main.c
+call Init once
+use functions in loop
+
+Example flow:
+
+Init → loop → On/Off
+9. Verify Behavior
+
+Ask:
+
+Does it turn on?
+Does it turn off?
+Does it behave consistently?
+
+If not → debug registers, not guesses.
+
+10. Clean Up (Most people skip this)
+fix naming consistency
+remove unused includes
+avoid magic numbers (start thinking PIN * 2)
+keep .h clean
+
+
+Mistakes and fixes
+
+Problem 1: Wrong resistor value
+
+❌ Used 600K resistor
+✅ Use 10K resistor — high resistance makes pin vulnerable to noise
+
+
+Problem 2: Floating pin
+
+❌ Pin connected to nothing when button open
+✅ Always use pull-up or pull-down resistor to define default voltage
+
+
+Problem 3: Wrong resistor position
+
+❌ Resistor in series with button
+✅ Pull-up: resistor between 3.3V and pin. Pull-down: resistor between pin and GND
+
+
+Problem 4: JTAG pins (PA13, PA14, PA15)
+
+❌ Used PA15 which is reserved for JTAG/SWD by default
+✅ Avoid PA13, PA14, PA15 — use regular GPIO pins like PA0, PA1
+
+
+Problem 5: Internal pull-up not disabled
+
+❌ STM32 GPIOA resets with pull-ups enabled on some pins (0x64000000)
+✅ Always clear PUPDR register for your pin before using it
+
+
+Problem 6: Breadboard button wiring
+
+❌ Connected button on same side
+✅ Connect diagonally across the button
+
+
+Problem 7: Button read in fast loop
+
+❌ Reading button state directly causes millions of toggles per second
+✅ Use edge detection — only act when currentState=1 && previousState=0
+
+
+Problem 8: previousState reset every loop
+
+❌ Declared previousState inside while loop — resets every iteration
+✅ Declare outside loop or use static keyword inside function
+
+
+Problem 9: Misleading function names
+
+❌ Led1_On() that also turns LED off
+✅ Name functions by what they actually do — Toggle_Led1()
+
+
+Problem 10: Global variables
+
+❌ previousState as global — any file can accidentally modify it
+✅ Use static inside the function — persists between calls but stays private

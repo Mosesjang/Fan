@@ -1,0 +1,61 @@
+OLD CODE:
+#include <stdint.h>
+#include "LED.h"
+#include "button.h"
+#include "motor.h"
+// port to use: PC10, PC12, PC11
+#define clk (*(volatile uint32_t*)0x40023830)
+#define ledMode (*(volatile uint32_t*)0x40020800)
+#define ledODR (*(volatile uint32_t*)0x40020814)
+
+
+void Led_Init(void){
+	clk |= (1 << 2);
+	ledMode &= ~(3 << 20); // led1
+	ledMode |= (1 << 20);
+	ledMode &= ~(3 << 22); // led2
+	ledMode |= (1 << 22);
+	ledMode &= ~(3 << 24); // led3
+	ledMode |= (1 << 24);
+}
+
+
+
+
+int Toggle_Led(uint32_t buttonState, uint32_t ledOn, uint32_t ledOff1, uint32_t ledOff2, uint32_t index){
+	static uint32_t previousState[3] = {0, 0, 0};
+
+
+	   if(buttonState == 1 && previousState[index] == 0){
+			if(ledODR & (1 << ledOn)){
+				ledODR &= ~(1 << ledOn);
+				
+
+			}
+		   else{
+				ledODR |= (1 << ledOn);
+				ledODR &= ~(1 << ledOff1);
+				ledODR &= ~(1 << ledOff2);
+				
+				
+//				Motor
+				volatile uint32_t fanState = 0;
+				switch(fanState){
+				case 0: 
+					break;
+				}
+
+		   }
+
+	   }
+
+	   previousState[index] = buttonState;
+	   return 0;
+}
+
+
+void delay(void){
+	for(volatile int x = 0; x < 500000; x++){
+
+	}
+}
