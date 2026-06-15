@@ -7,7 +7,7 @@ I'm on a journey of becoming a good embedded system engineer by building project
 This is an experiment to see if this learning technique works. 
 
 **Learning Method:**
-learning by starting with your goal and work backward.\n
+learning by starting with your goal and work backward.<br>
 **For example:** if you want to learn electronics don't start by learning math then move on to physics and then chemistry before learning electronics and would be ridiculously slow. so that that furture and start by building a circuit you want to make and then learning the things that are stopping your from making that and with repetition you would get better faster. I learn this from a video titled "How To Master Any Skill Fast (Give Yourself 2 Weeks)" by dan koe
 
 ## Code
