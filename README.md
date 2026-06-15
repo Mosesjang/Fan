@@ -2,8 +2,8 @@
 
 # Fan
 This is my first bare-metal project.
-  It's just a basic fan that turns on a pc fan and a led and changes the motor speed  when I push a button.
-I'm on a journey of becoming a good embedded system engineer by building project.
+  It's just a basic fan that turns on a pc fan and a led and changes the motor speed when I push a button using a 3dModel I found online.
+I'm on a journey of becoming a good embedded system engineer by building projects. This is an experiment to see if this learning technique(learning by starting with your goal and work backward. e.g. if you want to learn electronics don't start by learning math then move on to physics and then chemistry before learning electronics and would be ridiculously slow. so that that furture and start by building a circuit you want to make and then learning the things that are stopping your from making that and with repetition you would get better faster. I learn this from a video titled "How To Master Any Skill Fast (Give Yourself 2 Weeks)" by dan koe) works. 
 
 ## Code
 Two versions of this project exist:
@@ -24,6 +24,11 @@ Two versions of this project exist:
 A bare-metal STM32F401RE fan controller with 3 speed settings, 
 RGB LED indicators and PWM motor control.
 
+## ⚠️ Known Issues
+1. Fan airflow is relatively weaker compared to a traditional blade fan
+2. 3D printed parts do not align perfectly — some DIY adjustment required during assembly
+
+Why
 ## Demo
 [video here]
 
