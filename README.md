@@ -35,7 +35,6 @@ RGB LED indicators and PWM motor control.
 1. Fan airflow is relatively weaker compared to a traditional blade fan
 2. 3D printed parts do not align perfectly — some DIY adjustment required during assembly
 
-Why
 ## Demo
 [video here]
 
