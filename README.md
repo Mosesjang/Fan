@@ -3,7 +3,11 @@
 # Fan
 This is my first bare-metal project.
   It's just a basic fan that turns on a pc fan and a led and changes the motor speed when I push a button using a 3dModel I found online.
-I'm on a journey of becoming a good embedded system engineer by building projects. This is an experiment to see if this learning technique(learning by starting with your goal and work backward. e.g. if you want to learn electronics don't start by learning math then move on to physics and then chemistry before learning electronics and would be ridiculously slow. so that that furture and start by building a circuit you want to make and then learning the things that are stopping your from making that and with repetition you would get better faster. I learn this from a video titled "How To Master Any Skill Fast (Give Yourself 2 Weeks)" by dan koe) works. 
+I'm on a journey of becoming a good embedded system engineer by building projects. 
+This is an experiment to see if this learning technique works. 
+
+Learning Method:
+learning by starting with your goal and work backward. e.g. if you want to learn electronics don't start by learning math then move on to physics and then chemistry before learning electronics and would be ridiculously slow. so that that furture and start by building a circuit you want to make and then learning the things that are stopping your from making that and with repetition you would get better faster. I learn this from a video titled "How To Master Any Skill Fast (Give Yourself 2 Weeks)" by dan koe
 
 ## Code
 Two versions of this project exist:
